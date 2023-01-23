@@ -1,0 +1,42 @@
+{
+  "name": "logsignup",
+  "version": "8.1.3",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC", 
+  "dependencies": {
+    "agora-access-token": "^2.0.4",
+    "aws-sdk": "^2.1181.0",
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crc-32": "^1.2.2",
+    "crypto": "^1.0.1",
+    "cuint": "^0.2.2",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.0",
+    "expired-storage": "^1.0.2",
+    "express": "^4.17.3",
+    "generate-password": "^1.7.0",
+    "http": "^0.0.1-security",
+    "http-errors": "^2.0.0",
+    "jade": "^1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.10",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.7.3",
+    "nodemon": "^2.0.15",
+    "otp-generator": "^4.0.0",
+    "util": "^0.12.4",
+    "uuid": "^8.3.2"
+  }
+}
