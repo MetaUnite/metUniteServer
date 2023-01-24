@@ -26,7 +26,7 @@ exports.authenticateToken =  (req, res, next) => {
 
     //   req.user = user;
     // });
-    const user =  jwt.verify(token, "secretKey");
+    const user =  jwt.verify(token, process.env.JWT_SECRET);
 
     req.user = user;
     next();
