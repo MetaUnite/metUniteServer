@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const otpGenerator = require("otp-generator");
 const generator = require("generate-password");
-const transporter = require("../utils/sendmail");
+const transporter = require("../utils/sendMailDefaultMethod");
 const feedBackModel = require("../model/feedBackModel");
 
 exports.user_create = async (req, res) => {
@@ -83,7 +83,7 @@ exports.user_create = async (req, res) => {
       let info = await transporter.sendMail({
         from: process.env.AUTH_EMAIL,
         to: email,
-        subject: "Verification mail by Balaji Yadav for testing api",
+        subject: "Verification mail by Meta Unite Team.",
         text: `Your One Time Password is ${otp} for email verification`,
       });
 
@@ -363,7 +363,7 @@ exports.forgot_password = async (req, res) => {
     let info = await transporter.sendMail({
       from: process.env.AUTH_EMAIL,
       to: email,
-      subject: "Verification mail by Balaji Yadav for testing api",
+      subject: "Verification mail by Meta Unite Team",
       text: `Use this token to change password in your application
       
               token '${passwords}'`,
@@ -669,14 +669,14 @@ exports.resend_otp = async (req, res) => {
       specialChars: false,
       lowerCaseAlphabets: false,
     });
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
+//     let transporter = nodemailer.createTransport({
+//       service: "gmail",
 
-      auth: {
-        user: process.env.AUTH_EMAIL,
-        pass: process.env.AUTH_PASS,
-      },
-    });
+//       auth: {
+//         user: process.env.AUTH_EMAIL,
+//         pass: process.env.AUTH_PASS,
+//       },
+//     });
     let info = await transporter.sendMail({
       from: process.env.AUTH_EMAIL,
       to: userData.email,
