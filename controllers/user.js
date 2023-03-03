@@ -25,7 +25,7 @@ exports.user_create = async (req, res) => {
       readyplayermeId,
     } = req.body;
     if (email) {
-      const emailExists = await userModel.findOne({ email: email });
+      const emailExists = await userModel.findOne({ email: email,isDeleted:false });
 
       if (emailExists)
         return res.status(400).send({
@@ -35,6 +35,7 @@ exports.user_create = async (req, res) => {
           },
         });
     }
+   
     if (!user_type) {
       const salt = await bcrypt.genSalt(10);
       password = await bcrypt.hash(password, salt);
