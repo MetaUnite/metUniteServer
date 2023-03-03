@@ -251,6 +251,7 @@ exports.user_login = async (req, res) => {
     let user = await userModel.findOne({
       email: requestEmail,
       userBlock: false,
+      isDeleted:false
     });
     if (user) {
       const {
@@ -327,6 +328,7 @@ exports.forgot_password = async (req, res) => {
     const userData = await userModel.findOne({
       email: requestEmail,
       emailVerified: true,
+     
     });
     if (!userData)
       return res.status(404).send({
@@ -455,7 +457,7 @@ exports.change_password = async (req, res) => {
       password = await bcrypt.hash(newPassword, salt);
 
       const newUserData = await userModel.findOneAndUpdate(
-        { email: userId.email },
+        { _id: userId },
         { password: password },
         { new: true }
       );
@@ -604,6 +606,7 @@ exports.delete_account = async (req, res) => {
     let userData = await userModel.findOne({
       _id: userId,
       emailVerified: true,
+      isDeleted:false
     });
 
     let { _id, isDeleted, userLogout } = userData;
@@ -658,7 +661,7 @@ exports.logout = async (req, res) => {
 exports.resend_otp = async (req, res) => {
   try {
     const userId = req.user.userId;
-    const userData = await userModel.findOne({ _id: userId });
+    const userData = await userModel.findOne({ _id: userId,isDeleted:false });
 
     if (!userId) {
       return res
@@ -684,7 +687,7 @@ exports.resend_otp = async (req, res) => {
       subject: "Verification mail by Balaji Yadav for testing api",
       text: `Your One Time Password is ${otp} for email verification`,
     });
-    await userModel.updateOne({ _id: userId }, { otp: otp });
+    await userModel.updateOne({ _id: userId,isDeleted:false }, { otp: otp });
     return res
       .status(200)
       .send({ settings: { success: "1", message: "OTP sent to Your email " } });
@@ -756,8 +759,8 @@ exports.add_loginDate_filed = async (req, res) => {
 
 exports.block_user = async (req, res) => {
   try {
-    await userModel.updateOne(
-      { _id: req.params.id },
+    await userModel.findOneAndUpdate(
+      { _id: req.params.id,isDeleted:false },
       { isBlocked: true },
       { new: true }
     );
@@ -771,8 +774,8 @@ exports.block_user = async (req, res) => {
 
 exports.unblock_user = async (req, res) => {
   try {
-    await userModel.updateOne(
-      { _id: req.params.id },
+    await userModel.findOneAndUpdate(
+      { _id: req.params.id,isDeleted:false },
       { isBlocked: false },
       { new: true }
     );
