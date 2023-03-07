@@ -73,7 +73,7 @@ exports.send_otp_toEmail = async (req, res) => {
 
     await adminModel.updateOne(
       { email: userMail },
-      { $set: { otp: mail_otp } }
+      { $set: { otp: mail_otp,otpTime: new Date() } }
     );
 
     return res
