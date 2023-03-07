@@ -5,7 +5,7 @@ const userModel = require("../model/userModel");
 const otpGenerator = require("otp-generator");
 const generator = require("generate-password");
 const transporter = require("../utils/sendMailDefaultMethod");
-const emailValidator = require("validator");
+//const emailValidator = require("validator");
 
 exports.admin_signup = async (req, res) => {
   try {
