@@ -9,6 +9,7 @@ var multer = require("multer");
 
 var dbCon = require("./lib/db");
 
+var adminRouter = require("./routes/admin");
 var usersRouter = require("./routes/user");
 var feedbackRouter = require("./routes/feedBack");
 var roomRouter = require("./routes/room");
@@ -35,6 +36,7 @@ if (app.get("env") === "development") {
   app.use(logger("dev"));
 }
 
+app.use("/admin", adminRouter);
 app.use("/user", usersRouter);
 app.use("/feedback", feedbackRouter);
 app.use("/room", roomRouter);
