@@ -105,6 +105,7 @@ exports.login = async (req, res) => {
         token: generatedToken,
       });
     } else {
+      console.log(req.body);
       return res.status(400).send({ message: "Invalid credentials" });
     }
   } catch (err) {
