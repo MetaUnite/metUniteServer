@@ -85,6 +85,7 @@ exports.send_otp_toEmail = async (req, res) => {
 };
 exports.login = async (req, res) => {
   try {
+    console.log(req.body);
     const adminEmail = req.body.email;
     const adminPassword = req.body.password;
     const adminData = await adminModel.findOne({ email: adminEmail });
